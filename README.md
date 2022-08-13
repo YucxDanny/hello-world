@@ -29,6 +29,7 @@ int main()
 }
 
 二、判断输出1-100之间的奇数
+way1
 int main()
 {
 	int i = 1;
@@ -43,5 +44,16 @@ int main()
 		i++;
 	}
 	printf("奇数共有%d个\n", a);
+	return 0;
+}
+way2
+int main()
+{
+	int i = 1;
+	while (i < 101)
+	{
+		printf("%d ", i);
+		i += 2;
+	}
 	return 0;
 }
