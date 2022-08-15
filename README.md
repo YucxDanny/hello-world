@@ -217,7 +217,7 @@ int main()
 8、模拟strlen函数的功能
 int my_strlen(char* str)
 {
-	if (*str != "\0")
+	if (*str != '\0')
 		return (1 + my_strlen(str + 1));
 	else
 		return 0;
@@ -225,7 +225,7 @@ int my_strlen(char* str)
 //int my_strlen(char* str)//模拟实现strlen
 //{
 //	int count = 0;
-//	while(*str != "\0")
+//	while(*str != '\0')
 //	{
 //		count++;
 //		str++;
