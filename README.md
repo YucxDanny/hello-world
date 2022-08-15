@@ -195,3 +195,48 @@ int main()
 	return 0;
 }
 
+数归的简单应用
+7、依次打印数字
+void print(unsigned int n)
+{
+	if (n > 9)
+	{
+		print(n / 10);
+	}
+	printf("%d ", n % 10);
+}
+int main()
+{
+	unsigned int num = 0;
+	printf("请输入要打印的数>:");
+	scanf("%d", &num);
+	print(num);
+	return 0;
+}
+
+8、模拟strlen函数的功能
+int my_strlen(char* str)
+{
+	if (*str != "\0")
+		return (1 + my_strlen(str + 1));
+	else
+		return 0;
+}
+//int my_strlen(char* str)//模拟实现strlen
+//{
+//	int count = 0;
+//	while(*str != "\0")
+//	{
+//		count++;
+//		str++;
+//	}
+//	return count;
+//}
+int main()
+{
+	char arr[] = "bit"; //b i t \0
+	//int len = strlen(arr);
+	int len = my_strlen(arr);//arr是数组，传过去首元素的地址
+	printf("len=%d\n", len);
+	return 0;
+}
