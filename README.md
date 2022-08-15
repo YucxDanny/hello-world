@@ -1,5 +1,5 @@
 # hello-world
-My first repository Yucx
+My first repository,I'm Yucx from PRC.
 
 一、判断年龄
 int main()
@@ -57,3 +57,141 @@ int main()
 	}
 	return 0;
 }
+
+三、生成随机数的方式
+int main()
+{
+	srand((unsigned int)time(NULL));
+	int ret=rand();
+	printf("%d\n", ret);
+	return 0;
+}
+应用：玩猜数字游戏
+//猜数字游戏
+void menu()
+{
+	printf("***********************************\n");
+	printf("***     1.play      0.exit      ***\n");
+	printf("***********************************\n");
+}
+void game()
+{
+	int ret=rand()%100+1;
+	int guess = 0;
+	//用时间戳来设置随机数的生成起点
+	//time_t time(time_t *timer)
+	while (1)
+	{
+		printf("请输入数字>:");
+		scanf("%d", &guess);
+		if (guess < ret)
+		{
+			printf("猜小了！\n");
+		}
+		else if (guess > ret)
+		{
+			printf("猜大了！\n");
+		}
+		else
+		{
+			printf("恭喜你，猜对了！！！\n");
+			break;
+		}
+	}
+	
+	
+}
+//时间戳 当前计算机时间减去计算机起始时间1970.1.1 0：0：0的秒数
+int main()
+{
+	int input = 0;
+	srand((unsigned int)time(NULL));
+	do 
+	{
+		menu();
+		printf("请选择:>");
+		scanf("%d", &input);
+		switch (input)
+		{
+		case 1:
+			game();
+			break;
+		case 0:
+			printf("退出游戏，程序结束！\n");
+			break;
+		default:
+			printf("选择错误\n");
+			break;
+		}
+	} while (input);
+	return 0;
+}
+
+四、打印9*9乘法表
+int main()
+{
+	int i = 0;
+	int j = 0;
+	for (i = 1; i <= 9; i++)
+	{
+		for (j = 1; j <= i; j++)
+		{
+			printf("%d*%d=%-2d ", i, j, i * j);//-2d左对齐  2d右对齐
+		}
+		printf("\n");
+	}
+	return 0;
+}
+
+五、二分查找
+int main()
+{
+	int k = 0;
+	printf("请输入待查找的目标：");
+	scanf("%d", &k);
+	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+	int i = 0;
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	int j = sz - 1;
+	int m = (i + j)/2;
+	while (i <= j)
+	{
+		m = (i + j) / 2;
+		if (arr[m] < k)
+		{
+			i = m + 1;
+		}
+		else if (arr[m] > k)
+		{
+			j = m - 1;
+		}
+		else
+		{
+			printf("找到了目标，下标为：%d", m);
+			break;
+		}
+	}
+	if (i > j)
+	{
+		printf("找不到目标");
+	}
+	return 0;
+}
+
+六、交换两个数（应用到传址函数）
+void swap(int* x, int* y)
+{
+	int temp = *x;
+	*x = *y;
+	*y = temp;
+}
+int main()
+{
+	int i = 1;
+	int j = 2;
+	printf("i=%d j=%d\n", i, j);
+	swap(&i, &j);
+	printf("i=%d j=%d\n", i, j);
+	return 0;
+}
+
