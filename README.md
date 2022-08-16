@@ -1,6 +1,13 @@
 # hello-world
 My first repository,I'm Yucx from PRC.
 
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+#include<time.h>
+
 一、判断年龄
 int main()
 {
@@ -195,7 +202,7 @@ int main()
 	return 0;
 }
 
-数归的简单应用
+递归的简单应用
 7、依次打印数字
 void print(unsigned int n)
 {
@@ -238,5 +245,85 @@ int main()
 	//int len = strlen(arr);
 	int len = my_strlen(arr);//arr是数组，传过去首元素的地址
 	printf("len=%d\n", len);
+	return 0;
+}
+
+9、汉诺塔问题
+int tow(int n)
+{
+	int ret = 1;
+	if (n > 1)
+	{
+		ret = tow(n - 1) * 2 + 1;
+	}
+	return ret;
+}
+int main()
+{
+	int n = 0;
+	printf("请输入汉诺塔的阶数>:");
+	scanf("%d", &n);
+	int ret = tow(n);
+	printf("需移动的次数为：%d\n",ret);
+	return 0;
+}
+
+10、青蛙跳台阶问题
+int frog(int n)
+{
+	if (n<2)
+	{
+		return 1;
+	}
+	else
+	{
+		return (frog(n - 1) + frog(n - 2));
+	}
+}
+int main()
+{
+	int n = 0;
+	printf("请输入青蛙跳跃的台阶数>:");
+	scanf("%d", &n);
+	int ret = frog(n);
+	printf("青蛙共有%d种跳法\n",ret);
+	return 0;
+}
+
+11、冒泡排序
+void bubble_sort(int arr[], int sz)
+{
+	int i, j, flag;
+	for (i = 0; i < sz - 1; i++)
+	{
+		flag = 1;
+		for (j = 0; j < sz - 1 - i; j++)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				int temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+				flag = 0;
+			}
+		}
+		if (1 == flag)
+		{
+			break;
+		}
+	}
+}
+int main()
+{
+	int arr[] = { 7,8,9,0,2,3,1,4,5,6 };
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	int i = 0;
+	bubble_sort(arr, sz);
+	for (i = 0; i < sz; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	
+
 	return 0;
 }
