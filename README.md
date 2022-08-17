@@ -327,9 +327,10 @@ int main()
 }
 
 12、三子棋游戏
-文件1game.h
+文件1game.h头文件
 #define ROW 3
 #define COL 3
+//上述ROW COL可改为任意数
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<string.h>
@@ -456,7 +457,7 @@ char IsWin(char board[ROW][COL], int row, int col)
 {
 	int i = 0;
 	int j = 0; 
-
+//判断每行
 	for (i = 0; i < row; i++)
 	{
 		for (j = 0; j < col; j++)
@@ -471,7 +472,7 @@ char IsWin(char board[ROW][COL], int row, int col)
 			return board[i][0];
 		}
 	}
-
+//判断每列
 	for (j = 0; j < col; j++)
 	{
 		for (i = 0; i < row; i++)
@@ -486,7 +487,7 @@ char IsWin(char board[ROW][COL], int row, int col)
 			return board[0][j];
 		}
 	}
-
+//判断斜向对角
 	for (i = 0; i < row; i++)
 	{
 		if ((board[i][i] != board[0][0]) || (board[i][i] == ' '))
@@ -510,7 +511,7 @@ char IsWin(char board[ROW][COL], int row, int col)
 	{
 		return board[0][row - 1];
 	}
-
+//判断是否平局
 	if (1 == IsFull(board, ROW, COL))
 	{
 		return 'Q';
@@ -562,7 +563,6 @@ void game()
 		}
 	}
 
-
 	if (ret == '*')
 	{
 		printf("玩家赢！\n");
@@ -580,6 +580,7 @@ void game()
 void test()
 {
 	int input = 0;
+	//使用do while 代码至少进行一次，适合游戏菜单部分，巧用input
 	do
 	{
 		menu();
@@ -600,7 +601,7 @@ void test()
 		}
 	} while (input);
 }
-
+//主函数在此
 int main()
 {
 	test();
