@@ -327,7 +327,7 @@ int main()
 }
 
 12、三子棋游戏
-文件1game.h头文件
+文件1 game.h头文件
 #define ROW 3
 #define COL 3
 //上述ROW COL可改为任意数
@@ -344,7 +344,7 @@ void ComputerMove(char board[ROW][COL], int row, int col);
 //玩家*  电脑#   平局Q    继续C
 char IsWin(char board[ROW][COL], int row, int col);
 
-文件2game.c
+文件2 game.c
 #include "game.h"
 void InitBoard(char board[ROW][COL], int row, int col)
 {
@@ -522,7 +522,7 @@ char IsWin(char board[ROW][COL], int row, int col)
 	}
 }
 
-文件3test.c
+文件3 test.c
 //三子棋游戏
 #include "game.h"
 void menu()
@@ -602,6 +602,182 @@ void test()
 	} while (input);
 }
 //主函数在此
+int main()
+{
+	test();
+	return 0;
+}
+
+13、扫雷游戏
+文件1 game.h
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>//srand
+#include<time.h>//time
+
+#define ROW 9
+#define COL 9
+#define ROWS ROW+2
+#define COLS COL+2
+#define easy_count 10
+
+void InitBoard(char board[ROWS][COLS], int rows, int cols,char set);
+void DisplayBoard(char board[ROWS][COLS], int row, int col);
+void SetMine(char board[ROWS][COLS], int row, int col);
+void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col);
+
+文件2 game.c
+#include "game.h"
+
+void InitBoard(char board[ROWS][COLS], int rows, int cols,char set)
+{
+	int i, j;
+	for (i = 0; i < rows;i++)
+	{
+		for (j = 0; j < cols; j++)
+		{
+			board[i][j] = set;
+		}
+	}
+}
+
+void DisplayBoard(char board[ROWS][COLS], int row, int col)
+{
+	int i, j;
+	for (i = 0; i <= row; i++)
+	{
+		printf("%d ", i);
+	}
+	printf("\n");
+	for (i = 1; i <= row; i++)
+	{
+		printf("%d ",i);
+		for (j = 1; j <= col; j++)
+		{
+			printf("%c ", board[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+void SetMine(char board[ROWS][COLS], int row, int col)
+{
+	int count = easy_count;
+	while (count)
+	{
+		int x = rand() % row + 1;//1-9
+		int y = rand() % col + 1;
+		if (board[x][y] == '0')
+		{
+			board[x][y] = '1';
+			count--;
+		}
+	}
+}
+
+int get_mine_count(char mine[ROWS][COLS], int x, int y)
+{
+	return (mine[x - 1][y - 1] +
+		mine[x - 1][y] +
+		mine[x - 1][y + 1] +
+		mine[x][y - 1] +
+		mine[x][y + 1] +
+		mine[x + 1][y - 1] +
+		mine[x + 1][y] +
+		mine[x + 1][y + 1] - 8 * '0');
+}
+
+
+void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
+{
+	int x, y;
+	int win = 0;
+	while (win<row * col - easy_count)
+	{
+		printf("请输入坐标:>");
+		scanf("%d%d", &x, &y);
+		if (x >= 1 && x <= row && y >= 1 && y <= col)
+		{
+			if (mine[x][y] == '1')
+			{
+				printf("很遗憾，你被炸死了！\n");
+				DisplayBoard(mine, ROW, COL);
+				break;
+			}
+			else
+			{
+				int count = get_mine_count(mine, x, y);
+				show[x][y] = count + '0';
+				DisplayBoard(show, ROW, COL);
+				win++;
+			}
+		}
+		else
+		{
+			printf("输入不合法，请重新输入！\n");
+		}
+	}
+	if (win == row * col - easy_count)
+	{
+		printf("排雷成功\n");
+	}
+}
+
+文件3 test.c
+#include "game.h"
+
+void game()
+{
+	printf("扫雷游戏开始！\n");
+	//雷信息储存
+	//1.布置好的雷的信息
+	char mine[ROWS][COLS] = { 0 };
+	//2.排查出的雷的信息
+	char show[ROWS][COLS] = { 0 };
+	InitBoard(mine, ROWS, COLS,'0');
+	InitBoard(show, ROWS, COLS,'*');
+	DisplayBoard(mine, ROW, COL);
+	printf("\n");
+	DisplayBoard(show, ROW, COL);
+	SetMine(mine, ROW, COL);
+	//DisplayBoard(mine, ROW, COL);
+	FindMine(mine,show,ROW,COL);
+}
+
+void menu()
+{
+	printf("############################\n");
+	printf("#######1.play  0.exit#######\n");
+	printf("############################\n");
+}
+
+void test()
+{
+	int input = 0;
+	srand((unsigned int)time(NULL));
+	do
+	{
+	menu();
+	printf("请选择:>");
+	scanf("%d", &input);
+	//对scanf的内容作出判断
+	switch (input)
+	{
+	case 1:
+		printf("开始游戏！\n");
+		game();
+		break;
+	case 0:
+		printf("结束游戏程序！\n");
+		break;
+	default:
+		printf("选择输入错误，请重新输入！\n");
+	}
+	} while (input);
+}
+
 int main()
 {
 	test();
