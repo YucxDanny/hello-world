@@ -783,3 +783,50 @@ int main()
 	test();
 	return 0;
 }
+
+14、转置字符串
+void reverse(char arr[6])
+{
+	char tmp = arr[0];
+	int len = sizeof(arr)/sizeof(arr[0]);
+	len = strlen(arr);
+	arr[0] = arr[len - 1];
+	arr[len - 1] = '\0';
+	if (strlen(arr + 1) >= 2)
+	{
+		reverse(arr + 1);
+	}
+	arr[len - 1] = tmp;
+}
+int main()
+{
+	char arr[6] = "hello";
+	reverse(arr);
+	printf("%s\n", arr);
+	return 0;
+}
+
+15、计算m的n次方
+double calculate(int m, int n)
+{
+	if (0 == n)
+	{
+		return 1;
+	}
+	else if (n >= 1)
+	{
+		return m * calculate(m, n - 1);
+	}
+	else
+	{
+		return 1.0 / calculate(m, -n);
+	}
+}
+int main()
+{
+	int m, n;
+	scanf("%d%d", &m, &n);
+	double ret = calculate(m, n);
+	printf("ret=%lf\n", ret);
+	return 0;
+}
