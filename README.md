@@ -830,3 +830,25 @@ int main()
 	printf("ret=%lf\n", ret);
 	return 0;
 }
+
+16、my_strcpy的最优解
+char* my_strcpy(char* dest, const char* src)
+{
+	char* ret = dest;
+	assert(dest != NULL);//保证了指针的有效性
+	assert(src != NULL);
+	while (*dest++ = *src++)
+	{
+		;
+	}
+	return ret;
+}
+int main()
+{
+	char arr1[] = "######";
+	char arr2[] = "bit";
+	printf("%s\n", my_strcpy(arr1, arr2));
+	return 0;
+}
+
+17、
