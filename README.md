@@ -886,3 +886,53 @@ int main()
 	}
 	return 0;
 }
+
+18、搬砖问题
+int main()
+{
+	int n, men, children, women,count;
+	printf("Enter n>:");
+	scanf("%d", &n);
+	count = 0;
+	for (men = 0; men <= n / 3; men++)
+	{
+		for (women = 0; women <= n / 2; women++)
+		{
+			children = n - men - women;
+			if ((men * 3 + women * 2 + children) == n)
+			{
+				printf("men=%d,women=%d,children=%d\n", men, women, children);
+				count++;
+			}
+		}
+	}
+	return 0;
+}
+
+19、找零钱问题
+int main()
+{
+	int money, flag;
+	int n1, n2, n5;
+	printf("Enter money>:");
+	scanf("%d", &money);
+	flag = 0;
+	for (n5 = money / 5; (n5 >= 0) && (1 == flag);n5--)
+	{
+		for (n2 = (money - n5 * 5) / 2; (n2 >= 0) && (1 == flag); n2--)
+		{
+			for (n1 = money - n5 * 5 - n2 * 2; (n1 >= 0) && (1 == flag); n1--)
+
+			{
+				if (n1 + n2 * 2 + n5 * 5 == money)
+				{
+					flag = 1;
+					printf;
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+20、
